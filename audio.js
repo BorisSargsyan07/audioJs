@@ -2,18 +2,23 @@ let data = {
     title: [
         "XXXTENTACION-ATTENTION",
         "XXXTENTACION-MOONLIGHT", 
-        "XXXTENTACION-BROKEN-HEART"
+        "XXXTENTACION-BROKEN HEART",
+        "XXXTENTACION-NIGHTMARES",
+        "XXXTENTACION-JOCELYN FLORES"
     ],
     song: [
         "music/tentacion.mp3",
         "music/tentacion-moonlight.mp3", 
-        "music/tentacion-broken-heart.mp3"
+        "music/tentacion-broken-heart.mp3",
+        "music/XXXTENTACION-everybody dies.mp3",
+        "music/xxxtentacion-jocelyn_flores.mp3"
     ],
     poster: ['https://cdnb.artstation.com/p/assets/images/images/016/133/157/large/zachary-wolfe-x-01.jpg?1551036698&dl=1',
-            "https://i1.sndcdn.com/artworks-000676912237-hnstdx-t500x500.jpg",
-            "https://wallpapercave.com/uwp/uwp1469284.jpeg"]
+"https://i1.sndcdn.com/artworks-000676912237-hnstdx-t500x500.jpg",
+"https://wallpapercave.com/uwp/uwp1469284.jpeg",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYwX-vcWiJ5IeD4w2wBNppE9FSod2HD_ImWTWWQ83Om9OpUjXm-alyjt2GbxKOrDW2p5c&usqp=CAU",
+"https://w0.peakpx.com/wallpaper/320/303/HD-wallpaper-xxxtentacion-american-rapper-blue-neon-lights-superstars-creative-blue-backgrounds-american-celebrity-jahseh-dwayne-ricardo-onfroy-music-stars-xxxtentacion.jpg"]
 };
-
 
 
 let song = new Audio();
@@ -93,7 +98,16 @@ function totalTime(seconds) {
     var sec = Math.floor(seconds % 60)
     min = (min < 10) ? "0" + min : min;
     sec = (sec < 10) ? "0" + sec : sec;
-    currentTime.textContent += " / " + min + ":" + sec
+
+    if(isNaN(min) || isNaN(sec)){
+        return false
+    }else{
+
+        currentTime.textContent += " / " + min + ":" + sec
+    }
+
+
+
     
 };
 
@@ -104,7 +118,9 @@ function next() {
     currentSong = 0
     }
     playSong ();
-    play.src = "images/pause.png"
+    play.src = "images/pause.png";
+
+
     }
 
 function pre() {
@@ -113,7 +129,7 @@ function pre() {
     currentSong = data.song.length - 1;
     }
     playSong ();
-    play.src = "images/pause.png"
+    play.src = "images/pause.png";
 };
 
 function muted() {
@@ -127,3 +143,40 @@ function muted() {
     //unmute
     }
 };
+
+function increase() {
+    song.volume += 0.1;
+}
+    
+function decrease() {
+    song.volume -= 0.1;
+};
+
+
+
+
+
+const progress = document.getElementById('fill');
+const progressContainer = document.getElementById('handle');
+
+
+function updateProgress(e) {
+const { duration, currentTime } = e.srcElement;
+const progressPercent = (currentTime / duration) * 100;
+progress.style.width = `${progressPercent}%`;
+}
+
+// Set progress bar
+function setProgress(e) {
+const width = this.clientWidth;
+const clickX = e.offsetX;
+const duration = song.duration;
+
+song.currentTime = (clickX / width) * duration;
+}
+
+// Time/song update
+song.addEventListener('timeupdate', updateProgress);
+
+// Click on progress bar
+progressContainer.addEventListener('click', setProgress);

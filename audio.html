@@ -14,7 +14,7 @@
 
 <body>
     <div class="main" id="main"></div>
-    <div class="player">
+    <div class="player">    
         <div class="row1" id="row1">
         </div>
         <div id="songTitle">Title</div>
@@ -25,7 +25,7 @@
                 <img src="images/next.png" id="next" onclick="next()" alt="">
             </div>
             <div class="seek-bar">
-                <div class="handle">
+                <div class="handle" id= "handle">
                     <div id="fill">
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                 <div id="currentTime">00:00 / 00:00 </div>
                 <div class="muteButtons">
                     <img src="images/volume-down.png" id="decrease" onclick="decrease()" alt="">
-                    <img src="images/increase-volume.png" id="increase" alt="">
+                    <img src="images/increase-volume.png" id="increase" onclick="increase()"  alt="">
                     <img src="images/volume.png" onclick="muted()" alt="" id="mute">
 
                 </div>
